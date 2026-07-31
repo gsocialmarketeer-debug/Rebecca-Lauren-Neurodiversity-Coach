@@ -34,7 +34,9 @@ test("keeps coaching scope, session details and pricing honest", async () => {
 });
 
 test("contact form includes validation, consent and direct email or WhatsApp handoff", async () => {
-  const form = await read("components/ContactForm.tsx");
+  const [form, contact] = await Promise.all([
+    read("components/ContactForm.tsx"), read("app/contact/page.tsx"),
+  ]);
   assert.match(form, /required/);
   assert.match(form, /honeypot/);
   assert.match(form, /I consent to Rebecca Lauren Coaching/);
@@ -43,4 +45,7 @@ test("contact form includes validation, consent and direct email or WhatsApp han
   assert.match(form, /contact\.whatsapp/);
   assert.match(form, /Send by Email/);
   assert.match(form, /Send by WhatsApp/);
+  assert.match(form, /Free discovery call — 20 minutes/);
+  assert.match(contact, /Free 20-minute consultation/);
+  assert.match(contact, /rebecca-outdoors\.jpg/);
 });
