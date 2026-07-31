@@ -41,7 +41,7 @@ export default function Home() {
 
       <section className="section welcome">
         <div className="container welcome-grid">
-          <div className="welcome-image image-frame"><Image src="/images/meet-rebecca.webp" alt="Meet Rebecca, Anxiety and ADHD Coach" fill sizes="(max-width: 800px) 90vw, 42vw" /></div>
+          <div className="welcome-image image-frame"><Image src="/images/rebecca-portrait.jpg" alt="Portrait of Rebecca Lauren, Mental Health and Neurodiversity Coach" fill unoptimized sizes="(max-width: 800px) 90vw, 42vw" /></div>
           <div><p className="eyebrow">Welcome, you’re safe here</p><h2>Hi, I’m Rebecca.<br /><em>I’m so glad you’re here.</em></h2>
             <p>I’m a Mental Health Coach and Advocate, passionate about supporting adults, children and families through challenges including ADHD, anxiety, social anxiety, overwhelm, emotional regulation and bullying experiences.</p>
             <p>After receiving my own ADHD diagnosis later in life and living with Fibromyalgia, so much of my experience finally began to make sense. My personal journey has given me a deep and genuine understanding of how overwhelming life can sometimes feel.</p>

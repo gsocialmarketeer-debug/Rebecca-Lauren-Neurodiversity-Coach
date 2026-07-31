@@ -22,3 +22,4 @@
 @media(max-width:430px){.hero-copy h1{font-size:50px}.hero-visual{height:430px}.portrait-shell{border-width:5px}.image-frame{min-height:420px}.certificate-image{height:370px}.footer-grid{grid-template-columns:1fr}.footer-grid>div:first-child{grid-column:auto}.form-heading h2{font-size:40px}.button{width:100%}.button-row{align-items:stretch;flex-direction:column}.text-link{text-align:center}.cta-inner .button{width:100%}}
 @media(prefers-reduced-motion:no-preference){.fade-up{animation:fadeUp .7s ease both}.fade-up:nth-child(2){animation-delay:.12s}@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.welcome-image img{object-position:38% center}
