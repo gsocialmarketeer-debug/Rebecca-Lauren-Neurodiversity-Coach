@@ -31,7 +31,7 @@ export default function Home() {
             <p className="support-line"><span>♡</span> Online coaching with flexible mini and full-length sessions.</p>
           </div>
           <div className="hero-visual fade-up">
-            <div className="portrait-shell"><Image src="/images/rebecca-portrait.jpg" alt="Rebecca Lauren, Mental Health Coach and Advocate" fill priority sizes="(max-width: 800px) 90vw, 44vw" /></div>
+            <div className="portrait-shell"><Image src="/images/rebecca-hero-lakeside.jpg" alt="Rebecca holding white flowers beside a peaceful lake" fill priority sizes="(max-width: 800px) 90vw, 44vw" /></div>
             <div className="floating-note"><span>♡</span><strong>You matter.</strong><small>You’re not alone.</small></div>
             <div className="signature-note">Here to listen,<br />here to support.</div>
           </div>
