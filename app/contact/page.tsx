@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import { ContactForm } from "@/components/ContactForm";
 import { EmergencyNotice } from "@/components/Shared";
 import { contact } from "@/data/site";
@@ -21,7 +20,7 @@ export default function ContactPage() {
       <a href={contact.whatsapp} target="_blank" rel="noreferrer"><span>◉</span><div><small>WhatsApp</small><strong>Message Rebecca</strong></div><b>↗</b></a>
       <a href={contact.instagram} target="_blank" rel="noreferrer"><span>◎</span><div><small>Instagram</small><strong>@rebecca_neurocoach</strong></div><b>↗</b></a>
     </div><p className="reply-note">Rebecca will respond as soon as she can. Please remember this is not an urgent-support service.</p></aside>
-    <div className="form-card" id="enquiry"><div className="form-heading"><p className="eyebrow">Booking & enquiry form</p><h2>Tell me how I can help</h2><p>Share only the information needed to begin the conversation.</p></div><Suspense fallback={<p>Loading form…</p>}><ContactForm /></Suspense></div></div></section>
+    <div className="form-card" id="enquiry"><div className="form-heading"><p className="eyebrow">Booking & enquiry form</p><h2>Tell me how I can help</h2><p>Share only the information needed to begin the conversation.</p></div><ContactForm /></div></div></section>
     <section className="container notice-wrap"><EmergencyNotice /></section>
   </main>;
 }

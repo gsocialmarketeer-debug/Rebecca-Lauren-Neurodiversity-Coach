@@ -48,4 +48,5 @@ test("contact form includes validation, consent and direct email or WhatsApp han
   assert.match(form, /Free discovery call — 20 minutes/);
   assert.match(contact, /Free 20-minute consultation/);
   assert.match(contact, /rebecca-outdoors\.jpg/);
+  assert.doesNotMatch(contact, /Loading form/);
 });
