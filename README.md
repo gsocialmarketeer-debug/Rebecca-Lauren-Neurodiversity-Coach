@@ -24,7 +24,7 @@ pnpm test
 
 ## Enquiry form
 
-Create a Formspree form and set `FORMSPREE_ENDPOINT` using `.env.example` as a guide. The form validates submissions in the browser and on the server, includes a honeypot field, and shows a clear email fallback if the delivery service is unavailable.
+The form validates submissions in the browser, includes consent and privacy acknowledgement, and prepares the completed enquiry for the visitor to send through their own email or WhatsApp app. No form-submission service or API key is required.
 
 ## Updating site content
 

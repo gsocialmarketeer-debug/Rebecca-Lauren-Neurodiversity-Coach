@@ -33,15 +33,14 @@ test("keeps coaching scope, session details and pricing honest", async () => {
   assert.doesNotMatch(combined, /£\d|\$\d/);
 });
 
-test("contact form includes validation, consent, spam protection and server handling", async () => {
-  const [form, route, env] = await Promise.all([
-    read("components/ContactForm.tsx"), read("app/api/enquiry/route.ts"), read(".env.example"),
-  ]);
+test("contact form includes validation, consent and direct email or WhatsApp handoff", async () => {
+  const form = await read("components/ContactForm.tsx");
   assert.match(form, /required/);
   assert.match(form, /honeypot/);
   assert.match(form, /I consent to Rebecca Lauren Coaching/);
   assert.match(form, /Please do not use it for urgent or emergency support/);
-  assert.match(route, /FORMSPREE_ENDPOINT/);
-  assert.match(route, /status: 400/);
-  assert.match(env, /FORMSPREE_ENDPOINT=/);
+  assert.match(form, /mailto:/);
+  assert.match(form, /contact\.whatsapp/);
+  assert.match(form, /Send by Email/);
+  assert.match(form, /Send by WhatsApp/);
 });

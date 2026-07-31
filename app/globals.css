@@ -25,3 +25,4 @@
 .welcome-image img{object-position:38% center}
 .journey-image,.family-art{width:100%;height:auto;min-height:0;aspect-ratio:2/3;background:#fff;overflow:hidden}
 .journey-image img,.family-art img{object-fit:contain}
+.send-choice{margin:24px 0 14px;color:#685f60;font-size:13px}.form-actions{display:grid;grid-template-columns:1fr 1fr;gap:14px}.form-actions .form-submit{margin-top:0}.button-whatsapp{background:#506b5b;border-color:#506b5b}.button-whatsapp:hover{background:#3f584a;border-color:#3f584a}@media(max-width:760px){.form-actions{grid-template-columns:1fr}}

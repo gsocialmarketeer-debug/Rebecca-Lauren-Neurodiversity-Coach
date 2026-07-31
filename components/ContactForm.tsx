@@ -1,31 +1,46 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent } from "react";
 import { contact } from "@/data/site";
-
-type State = "idle" | "sending" | "success" | "error";
 
 export function ContactForm() {
   const params = useSearchParams();
   const preset = params.get("session");
   const initialSession = preset === "package" ? "10-session package interest" : preset === "mini" ? "Mini session — 45 minutes" : preset === "full" ? "Full session — 60 minutes" : "Not sure yet";
-  const [state, setState] = useState<State>("idle");
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
+  function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) { form.reportValidity(); return; }
-    setState("sending");
     const payload = Object.fromEntries(new FormData(form));
-    try {
-      const response = await fetch("/api/enquiry", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-      if (!response.ok) throw new Error("Unable to send");
-      setState("success"); form.reset();
-    } catch { setState("error"); }
+    const value = (key: string) => String(payload[key] ?? "").trim();
+    const message = [
+      "Hello Rebecca,",
+      "",
+      "I would like to enquire about coaching support.",
+      "",
+      `Name: ${value("name")}`,
+      `Email: ${value("email")}`,
+      value("telephone") ? `Telephone: ${value("telephone")}` : "",
+      `Support for: ${value("supportFor")}`,
+      value("ageRange") ? `Age range: ${value("ageRange")}` : "",
+      `Main area of support: ${value("supportArea")}`,
+      `Preferred session: ${value("session")}`,
+      `Preferred reply method: ${value("contactMethod")}`,
+      "",
+      "Message:",
+      value("message"),
+    ].filter(Boolean).join("\n");
+    const submitter = (event.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
+    if (submitter?.value === "whatsapp") {
+      window.location.href = `${contact.whatsapp}?text=${encodeURIComponent(message)}`;
+      return;
+    }
+    const subject = `Website enquiry from ${value("name")}`;
+    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
   }
 
-  if (state === "success") return <div className="form-status success" role="status"><span>✓</span><h3>Thank you for getting in touch.</h3><p>Rebecca will respond as soon as she can.</p></div>;
   return <form className="contact-form" onSubmit={submit} noValidate>
     <div className="honeypot" aria-hidden="true"><label>Leave this field blank<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
     <div className="form-grid">
@@ -42,7 +57,10 @@ export function ContactForm() {
     <label className="check"><input type="checkbox" name="consent" value="yes" required /><span>I consent to Rebecca Lauren Coaching using the information provided to respond to my enquiry.</span></label>
     <label className="check"><input type="checkbox" name="privacy" value="yes" required /><span>I have read and acknowledge the <a href="/privacy">Privacy Policy</a>.</span></label>
     <p className="form-note">This form is for general enquiries and coaching bookings. Please do not use it for urgent or emergency support.</p>
-    {state === "error" && <p className="form-error" role="alert">Your enquiry could not be sent just now. Please email <a href={`mailto:${contact.email}`}>{contact.email}</a> instead.</p>}
-    <button className="button form-submit" disabled={state === "sending"}>{state === "sending" ? "Sending…" : "Send My Enquiry"} <span>→</span></button>
+    <p className="send-choice">Choose how you would like to send your enquiry. Your email or WhatsApp app will open with the details filled in for you to review before sending.</p>
+    <div className="form-actions">
+      <button className="button form-submit" type="submit" value="email">Send by Email <span>→</span></button>
+      <button className="button form-submit button-whatsapp" type="submit" value="whatsapp">Send by WhatsApp <span>→</span></button>
+    </div>
   </form>;
 }
