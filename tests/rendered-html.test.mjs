@@ -18,6 +18,14 @@ test("includes every requested route and navigation destination", async () => {
   for (const route of ["/privacy", "/terms", "/disclaimer", "/safeguarding"]) assert.match(footer, new RegExp(route));
 });
 
+test("uses the live site URL and a landscape social preview card", async () => {
+  const layout = await read("app/layout.tsx");
+  assert.match(layout, /rebecca-lauren-neurodiversity-coach\.vercel\.app/);
+  assert.match(layout, /\/og\.png/);
+  assert.match(layout, /width: 1200, height: 630/);
+  assert.doesNotMatch(layout, /www\.example\.com/);
+});
+
 test("keeps coaching scope, session details and pricing honest", async () => {
   const [home, services, disclaimer, siteData] = await Promise.all([
     read("app/page.tsx"), read("app/services/page.tsx"), read("app/disclaimer/page.tsx"), read("data/site.ts"),
