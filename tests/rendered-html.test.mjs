@@ -29,8 +29,25 @@ test("keeps coaching scope, session details and pricing honest", async () => {
   assert.match(combined, /Coming Soon/);
   assert.match(combined, /prices will be confirmed directly/i);
   assert.match(combined, /not psychotherapy/i);
-  assert.match(combined, /does not promise or guarantee/i);
+  assert.match(combined, /promised or guaranteed/i);
   assert.doesNotMatch(combined, /£\d|\$\d/);
+});
+
+test("publishes complete legal and safeguarding information", async () => {
+  const [terms, privacy, disclaimer, safeguarding, legalPage, certificates] = await Promise.all([
+    read("app/terms/page.tsx"), read("app/privacy/page.tsx"), read("app/disclaimer/page.tsx"),
+    read("app/safeguarding/page.tsx"), read("components/LegalPage.tsx"), read("components/CertificateGallery.tsx"),
+  ]);
+  const legal = `${terms}\n${privacy}\n${disclaimer}\n${safeguarding}\n${legalPage}`;
+  assert.doesNotMatch(legal, /Draft content/i);
+  assert.match(terms, /consumer rights/i);
+  assert.match(privacy, /lawful bases/i);
+  assert.match(privacy, /Information Commissioner/i);
+  assert.match(disclaimer, /not psychotherapy/i);
+  assert.match(safeguarding, /NHS 111/);
+  assert.match(safeguarding, /116 123/);
+  assert.match(certificates, /Infant Sleep Consultant — Level Three/);
+  assert.match(certificates, /certificate-infant-sleep-consultant\.jpg/);
 });
 
 test("contact form includes validation, consent and direct email or WhatsApp handoff", async () => {
