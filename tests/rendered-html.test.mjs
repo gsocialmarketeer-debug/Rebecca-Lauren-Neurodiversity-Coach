@@ -50,7 +50,7 @@ test("publishes complete legal and safeguarding information", async () => {
   assert.match(certificates, /certificate-infant-sleep-consultant\.jpg/);
 });
 
-test("contact form includes validation, consent and direct email or WhatsApp handoff", async () => {
+test("contact form includes validation, consent, direct email delivery and WhatsApp handoff", async () => {
   const [form, contact] = await Promise.all([
     read("components/ContactForm.tsx"), read("app/contact/page.tsx"),
   ]);
@@ -58,9 +58,10 @@ test("contact form includes validation, consent and direct email or WhatsApp han
   assert.match(form, /honeypot/);
   assert.match(form, /I consent to Rebecca Lauren Coaching/);
   assert.match(form, /Please do not use it for urgent or emergency support/);
-  assert.match(form, /mailto:/);
+  assert.match(form, /formsubmit\.co\/ajax/);
+  assert.match(form, /Thank you — your enquiry has been sent/);
   assert.match(form, /contact\.whatsapp/);
-  assert.match(form, /Send by Email/);
+  assert.match(form, /Send enquiry/);
   assert.match(form, /Send by WhatsApp/);
   assert.match(form, /Free discovery call — 20 minutes/);
   assert.match(contact, /Free 20-minute consultation/);

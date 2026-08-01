@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { contact } from "@/data/site";
 
 function sessionFromPreset(preset: string | null) {
@@ -9,12 +9,13 @@ function sessionFromPreset(preset: string | null) {
 
 export function ContactForm() {
   const sessionSelect = useRef<HTMLSelectElement>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   useEffect(() => {
     if (sessionSelect.current) sessionSelect.current.value = sessionFromPreset(new URLSearchParams(window.location.search).get("session"));
   }, []);
 
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) { form.reportValidity(); return; }
@@ -42,12 +43,42 @@ export function ContactForm() {
       window.location.href = `${contact.whatsapp}?text=${encodeURIComponent(message)}`;
       return;
     }
-    const subject = `Website enquiry from ${value("name")}`;
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+    setStatus("sending");
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${contact.email}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: value("name"),
+          email: value("email"),
+          telephone: value("telephone") || "Not provided",
+          "support for": value("supportFor"),
+          "age range": value("ageRange") || "Not provided",
+          "main area of support": value("supportArea"),
+          "preferred session": value("session"),
+          "preferred reply method": value("contactMethod"),
+          message: value("message"),
+          consent: "Confirmed",
+          "privacy policy acknowledged": "Confirmed",
+          _subject: `New website enquiry from ${value("name")}`,
+          _template: "table",
+          _honey: value("_honey"),
+          _url: window.location.href,
+        }),
+      });
+      const result = await response.json().catch(() => null);
+      if (!response.ok || result?.success === false || result?.success === "false") throw new Error("Submission failed");
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
-  return <form className="contact-form" onSubmit={submit} noValidate>
-    <div className="honeypot" aria-hidden="true"><label>Leave this field blank<input name="website" tabIndex={-1} autoComplete="off" /></label></div>
+  if (status === "sent") return <div className="form-status" role="status"><span>✓</span><h3>Thank you — your enquiry has been sent.</h3><p>Rebecca will reply as soon as she can. Please remember this is not an urgent-support service.</p><button className="text-link" type="button" onClick={() => setStatus("idle")}>Send another enquiry</button></div>;
+
+  return <form className="contact-form" action={`https://formsubmit.co/${contact.email}`} method="POST" onSubmit={submit} noValidate>
+    <div className="honeypot" aria-hidden="true"><label>Leave this field blank<input name="_honey" tabIndex={-1} autoComplete="off" /></label></div>
     <div className="form-grid">
       <label>Full name <span>*</span><input name="name" autoComplete="name" required /></label>
       <label>Email address <span>*</span><input type="email" name="email" autoComplete="email" required /></label>
@@ -62,10 +93,11 @@ export function ContactForm() {
     <label className="check"><input type="checkbox" name="consent" value="yes" required /><span>I consent to Rebecca Lauren Coaching using the information provided to respond to my enquiry.</span></label>
     <label className="check"><input type="checkbox" name="privacy" value="yes" required /><span>I have read and acknowledge the <a href="/privacy">Privacy Policy</a>.</span></label>
     <p className="form-note">This form is for general enquiries and coaching bookings. Please do not use it for urgent or emergency support.</p>
-    <p className="send-choice">Choose how you would like to send your enquiry. Your email or WhatsApp app will open with the details filled in for you to review before sending.</p>
+    {status === "error" && <p className="form-error" role="alert">Your enquiry could not be sent just now. Please try again, use WhatsApp, or email <a href={`mailto:${contact.email}`}>{contact.email}</a>.</p>}
+    <p className="send-choice">Send the form directly to Rebecca&apos;s email, or choose WhatsApp to open a message for review before sending.</p>
     <div className="form-actions">
-      <button className="button form-submit" type="submit" value="email">Send by Email <span>→</span></button>
-      <button className="button form-submit button-whatsapp" type="submit" value="whatsapp">Send by WhatsApp <span>→</span></button>
+      <button className="button form-submit" type="submit" value="email" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send enquiry"} <span>→</span></button>
+      <button className="button form-submit button-whatsapp" type="submit" value="whatsapp" disabled={status === "sending"}>Send by WhatsApp <span>→</span></button>
     </div>
   </form>;
 }
