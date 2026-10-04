@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CTA, SectionHeading } from "@/components/Shared";
 import { sessions, supportAreas } from "@/data/site";
@@ -18,6 +19,20 @@ const faqs = [
 export default function ServicesPage() {
   return <main>
     <section className="page-hero services-hero"><div className="container narrow"><p className="eyebrow">Flexible • Personalised • Online</p><h1>Coaching & <em>Support</em></h1><p className="hero-lede">Flexible, personalised online support designed around your individual needs.</p><div className="button-row center"><Link className="button" href="/contact">Send an enquiry <span>→</span></Link><a className="text-link" href="#sessions">View session options ↓</a></div></div></section>
+
+    <section className="section package-feature services-package-feature">
+      <div className="container package-feature-grid">
+        <a className="package-poster" href="#ten-session-package" aria-label="View details of Rebecca’s 10-session coaching package">
+          <Image src="/images/short-sweet-coaching-10-session.png" alt="Short, Sweet Coaching with Rebecca Lauren — 10-session package" fill priority sizes="(max-width: 760px) 100vw, 56vw" />
+        </a>
+        <div className="package-feature-copy">
+          <p className="eyebrow">Featured support • 10 sessions</p>
+          <h2>Short, sweet coaching with <em>time to grow.</em></h2>
+          <p>Consistent, solution-focused support for clients who want to build confidence, resilience, healthier routines and practical coping strategies at their own pace.</p>
+          <a className="button" href="#ten-session-package">View package details <span>↓</span></a>
+        </div>
+      </div>
+    </section>
 
     <section className="section intro-centered"><div className="container narrow"><p className="eyebrow">A space centred around you</p><h2>Support that feels human,<br /><em>practical and personal.</em></h2><p>Every person and every situation is different. Sessions provide a calm, non-judgemental space where we can explore what you are experiencing and work towards practical strategies that feel realistic for you.</p></div></section>
 
