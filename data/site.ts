@@ -11,7 +11,7 @@ export const sessions = {
   pricingNote: "Session prices will be confirmed directly during your enquiry.",
   mini: { title: "Mini Session", duration: "45 minutes" },
   full: { title: "Full Session", duration: "60 minutes", flexibility: "May continue for up to 90 minutes where required and agreed." },
-  package: { title: "Ongoing Support Package", sessions: 10, status: "Coming Soon" },
+  package: { title: "10-Session Coaching Package", sessions: 10, status: "Now available" },
 };
 
 export const supportAreas = [

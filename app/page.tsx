@@ -61,10 +61,29 @@ export default function Home() {
       <section className="section help-section"><div className="container help-layout"><div className="help-intro"><p className="eyebrow">How I can help</p><h2>Small steps can create <em>meaningful change.</em></h2><p>Gentle, practical support for the challenges that can make everyday life feel heavy.</p><Link href="/services" className="text-link">See all services <span>→</span></Link></div>
         <div className="help-grid">{supportAreas.map(([title, copy, icon]) => <article key={title}><span>{icon}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
 
+      <section className="section package-feature">
+        <div className="container package-feature-grid">
+          <Link className="package-poster" href="/services#ten-session-package" aria-label="Explore Rebecca’s 10-session coaching package">
+            <Image src="/images/short-sweet-coaching-10-session.png" alt="Short, Sweet Coaching with Rebecca Lauren — 10-session package" fill sizes="(max-width: 760px) 100vw, 56vw" />
+          </Link>
+          <div className="package-feature-copy">
+            <p className="eyebrow">Now available • 10-session package</p>
+            <h2>Consistent support for <em>meaningful change.</em></h2>
+            <p>A gentle, structured package for clients who would like time to build practical strategies, confidence, resilience and positive routines at their own pace.</p>
+            <ul>
+              <li>Solution-focused support for everyday life</li>
+              <li>Personalised sessions shaped around your goals</li>
+              <li>Space to build lasting coping strategies and self-belief</li>
+            </ul>
+            <Link className="button" href="/services#ten-session-package">Explore the package <span>→</span></Link>
+          </div>
+        </div>
+      </section>
+
       <section className="section services-preview"><div className="container"><SectionHeading eyebrow="Flexible online coaching" title="Support that meets you where you are." />
         <div className="session-grid"><article className="session-card featured"><div><span className="session-number">01</span><span className="pill">Focused support</span></div><h3>Mini Session</h3><p className="duration">45 <span>minutes</span></p><p>A focused online session for guidance, reassurance or support with one specific challenge.</p><Link className="button button-outline" href="/contact?session=mini">Enquire about a mini session</Link></article>
         <article className="session-card"><div><span className="session-number">02</span><span className="pill">Deeper support</span></div><h3>Full Session</h3><p className="duration">60 <span>minutes</span></p><p>A more in-depth coaching session with time to explore your needs, goals and practical next steps. Sessions may continue up to 90 minutes when agreed and genuinely needed.</p><Link className="button button-outline" href="/contact?session=full">Enquire about a full session</Link></article></div>
-        <div className="coming-soon"><span>Coming soon</span><p>A structured 10-session support package for consistent, ongoing support.</p><Link href="/contact?session=package">Register your interest →</Link></div>
+        <div className="coming-soon"><span>Now available</span><p>A structured 10-session package for consistent, personalised coaching support.</p><Link href="/contact?session=package">Enquire about the package →</Link></div>
       </div></section>
 
       <section className="section approach-section"><div className="container approach-grid"><div><p className="eyebrow">My approach</p><h2>A calm and supportive space, <em>centred around you.</em></h2><p>Your story, pace and needs are unique. Coaching should feel human, collaborative and useful in everyday life.</p></div><div className="approach-list">{["Warm, compassionate and non-judgemental", "Person-centred support", "Practical strategies for everyday life", "Sessions tailored to individual needs", "Flexible online support", "Collaborative family guidance where appropriate"].map((x, i) => <div key={x}><span>0{i + 1}</span><p>{x}</p></div>)}</div></div></section>
