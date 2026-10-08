@@ -70,6 +70,7 @@ export default function Home() {
             <p className="eyebrow">Now available • 10-session package</p>
             <h2>Consistent support for <em>meaningful change.</em></h2>
             <p>A gentle, structured package for clients who would like time to build practical strategies, confidence, resilience and positive routines at their own pace.</p>
+            <div className="package-rate"><strong>£360</strong><span>10 sessions • £36 per standard one-hour session</span></div>
             <ul>
               <li>Solution-focused support for everyday life</li>
               <li>Personalised sessions shaped around your goals</li>
@@ -83,7 +84,7 @@ export default function Home() {
       <section className="section services-preview"><div className="container"><SectionHeading eyebrow="Flexible online coaching" title="Support that meets you where you are." />
         <div className="session-grid"><article className="session-card featured"><div><span className="session-number">01</span><span className="pill">Focused support</span></div><h3>Mini Session</h3><p className="duration">45 <span>minutes</span></p><p>A focused online session for guidance, reassurance or support with one specific challenge.</p><Link className="button button-outline" href="/contact?session=mini">Enquire about a mini session</Link></article>
         <article className="session-card"><div><span className="session-number">02</span><span className="pill">Deeper support</span></div><h3>Full Session</h3><p className="duration">60 <span>minutes</span></p><p>A more in-depth coaching session with time to explore your needs, goals and practical next steps. Sessions may continue up to 90 minutes when agreed and genuinely needed.</p><Link className="button button-outline" href="/contact?session=full">Enquire about a full session</Link></article></div>
-        <div className="coming-soon"><span>Now available</span><p>A structured 10-session package for consistent, personalised coaching support.</p><Link href="/contact?session=package">Enquire about the package →</Link></div>
+        <div className="coming-soon"><span>Now available</span><p>10 personalised sessions for £360 — equivalent to £36 per standard one-hour session.</p><Link href="/contact?session=package">Enquire about the package →</Link></div>
       </div></section>
 
       <section className="section approach-section"><div className="container approach-grid"><div><p className="eyebrow">My approach</p><h2>A calm and supportive space, <em>centred around you.</em></h2><p>Your story, pace and needs are unique. Coaching should feel human, collaborative and useful in everyday life.</p></div><div className="approach-list">{["Warm, compassionate and non-judgemental", "Person-centred support", "Practical strategies for everyday life", "Sessions tailored to individual needs", "Flexible online support", "Collaborative family guidance where appropriate"].map((x, i) => <div key={x}><span>0{i + 1}</span><p>{x}</p></div>)}</div></div></section>

@@ -57,3 +57,17 @@
   .services-hero{padding:58px 0 64px}
   .services-hero .hero-lede{margin:22px auto 28px}
 }
+
+/* 10-session package pricing */
+.package-rate{display:flex;align-items:center;gap:18px;margin:25px 0 28px;padding:17px 20px;background:rgba(255,255,255,.68);border:1px solid rgba(197,164,109,.5)}
+.package-rate strong{font-family:var(--serif);font-size:38px;font-weight:500;line-height:1;color:var(--brown)}
+.package-rate span{font-size:11px;line-height:1.55;text-transform:uppercase;letter-spacing:.08em;color:#675d5f}
+.package-price{max-width:760px;margin:30px auto;padding:28px;background:rgba(255,255,255,.7);border:1px solid var(--gold-light)}
+.package-price>strong{display:block;font-family:var(--serif);font-size:64px;font-weight:500;line-height:1;color:var(--brown)}
+.package-price>span{display:block;margin:8px 0 18px;text-transform:uppercase;letter-spacing:.12em;font-size:10px;color:var(--rose-dark);font-weight:700}
+.package-price p{margin:0;font-size:15px;color:#62595a}
+.package-duration{max-width:760px!important;margin:0 auto 26px!important;color:var(--rose-dark)}
+@media(max-width:430px){
+  .package-rate{align-items:flex-start;flex-direction:column;gap:9px}
+  .package-price>strong{font-size:52px}
+}

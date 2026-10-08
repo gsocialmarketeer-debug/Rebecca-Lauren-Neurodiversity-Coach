@@ -11,7 +11,7 @@ export const sessions = {
   pricingNote: "Session prices will be confirmed directly during your enquiry.",
   mini: { title: "Mini Session", duration: "45 minutes" },
   full: { title: "Full Session", duration: "60 minutes", flexibility: "May continue for up to 90 minutes where required and agreed." },
-  package: { title: "10-Session Coaching Package", sessions: 10, status: "Now available" },
+  package: { title: "10-Session Coaching Package", sessions: 10, status: "Now available", totalPrice: "£360", sessionPrice: "£36", usualSessionPrice: "£40", saving: "£40" },
 };
 
 export const supportAreas = [
