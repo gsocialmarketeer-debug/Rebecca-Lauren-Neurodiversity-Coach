@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { contact } from "@/data/site";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://rebecca-lauren-neurodiversity-coach.vercel.app";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rebeccaneurocoach.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
