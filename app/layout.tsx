@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   openGraph: { title: "Rebecca Lauren Coaching", description: "Feel heard, supported and empowered with warm, personalised online coaching.", url: siteUrl, siteName: "Rebecca Lauren Coaching", locale: "en_GB", type: "website", images: [{ url: "/og.png", width: 1200, height: 630, alt: "Rebecca Lauren Coaching — Feel heard, supported and empowered" }] },
   twitter: { card: "summary_large_image", title: "Rebecca Lauren Coaching", description: "Feel heard, supported and empowered with warm, personalised online coaching.", images: ["/og.png"] },
   icons: { icon: "/favicon.jpg", shortcut: "/favicon.jpg" },
+  verification: { google: "BmzrciXmoB1mlrBPKpN02bqoJA0VvpbJTKVSaCvJi1E" },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
